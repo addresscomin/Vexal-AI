@@ -1,64 +1,6 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#173d32">
-<title>Gareeb Nawaz — Google Review Poster</title>
-<style>
-:root{--green:#173d32;--gold:#b99152;--ink:#1d2822;--muted:#69756e}
-*{box-sizing:border-box}body{margin:0;padding:24px;background:#eef1ed;color:var(--ink);font-family:Arial,Helvetica,sans-serif;display:grid;place-items:center;min-height:100vh}
-.sheet{width:min(100%,650px);background:white;border:1px solid #e0e5df;border-radius:20px;padding:42px 34px;text-align:center;box-shadow:0 16px 40px #132b1b12}
-.topline{height:5px;width:74px;background:var(--gold);border-radius:9px;margin:0 auto 22px}
-h1{font-size:38px;letter-spacing:-1px;color:var(--green);margin:0}
-h2{font-size:22px;margin:12px 0 0;font-weight:600}
-.copy{font-size:16px;color:var(--muted);line-height:1.55;max-width:430px;margin:14px auto 20px}
-#qr{width:290px;min-height:290px;margin:10px auto 18px;display:grid;place-items:center}
-#qr img,#qr canvas{max-width:100%;height:auto!important}
-.scan{font-size:18px;color:var(--green);font-weight:800;letter-spacing:.2px}
-.address{font-size:13px;color:var(--muted);margin-top:17px}
-.status{font-size:12px;color:#8b4b35;line-height:1.5}
-.controls{display:flex;gap:10px;justify-content:center;margin-top:22px}
-button{border:0;border-radius:10px;padding:12px 18px;background:var(--green);color:white;font-weight:700;font-size:14px}
-button.secondary{background:#eaf0eb;color:var(--green)}
-button:disabled{opacity:.5;cursor:not-allowed}
-@media print{body{padding:0;background:#fff;display:block}.sheet{width:100%;max-width:none;min-height:100vh;border:0;border-radius:0;box-shadow:none;padding:35mm 18mm}.controls,.status{display:none}}
-</style></head>
-<body><main class="sheet">
-<div class="topline"></div>
-<h1>Gareeb Nawaz Restaurant Gulmarg</h1>
-<h2>Enjoyed your visit?</h2>
-<p class="copy">We value your feedback. Scan the QR code to open our Google Review page and share your honest experience.</p>
-<div id="qr" aria-label="Google review QR code" role="img">Preparing QR code…</div>
-<div class="scan">SCAN TO REVIEW US ON GOOGLE</div>
-<div class="address">Main Market, Gulmarg Road, near J&K Bank, Gulmarg, Jammu and Kashmir 193403</div>
-<p class="status" id="status" role="status" aria-live="polite">Loading QR code. Please wait before printing.</p>
-<div class="controls"><button id="print" onclick="window.print()" disabled>Print poster</button><button id="download" class="secondary" onclick="downloadQR()" disabled>Download QR PNG</button></div>
-</main>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script>
-const reviewUrl="https://search.google.com/local/writereview?placeid=ChIJrwguek2v4TgRHRmwAN6Njw";
-const box=document.getElementById("qr");
-const status=document.getElementById("status");
-const printButton=document.getElementById("print");
-const downloadButton=document.getElementById("download");
-if(typeof QRCode==="undefined"){
- box.textContent="QR library could not load. Check your internet connection and reload.";
- status.textContent="QR not ready — do not print this poster yet.";
-}else{
- try{
-  new QRCode(box,{text:reviewUrl,width:270,height:270,colorDark:"#111111",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.H});
-  status.textContent="QR generated. Scan-test it with another phone before printing.";
-  printButton.disabled=false;
-  downloadButton.disabled=false;
- }catch(error){
-  box.textContent="QR could not be generated. Please reload and try again.";
-  status.textContent="QR not ready — do not print this poster yet.";
- }
-}
-function downloadQR(){
- const canvas=box.querySelector("canvas"),img=box.querySelector("img");
- const href=canvas?canvas.toDataURL("image/png"):img?.src;
- if(!href){alert("QR is loading. Please try again.");return;}
- const a=document.createElement("a");a.href=href;a.download="gareeb-nawaz-google-review-qr.png";a.click();
-}
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Gareeb Nawaz | Google Review Poster</title><style>
+:root{--green:#173d32;--gold:#b99152;--muted:#69756e}*{box-sizing:border-box}body{margin:0;padding:24px;background:#eef1ed;font-family:Arial,Helvetica,sans-serif;display:grid;place-items:center;min-height:100vh}.sheet{width:min(100%,650px);background:white;border:1px solid #e0e5df;border-radius:20px;padding:42px 34px;text-align:center;box-shadow:0 16px 40px #132b1b12}.line{height:5px;width:74px;background:var(--gold);border-radius:9px;margin:0 auto 22px}h1{font-size:34px;color:var(--green);margin:0}h2{font-size:21px;margin:13px 0}.copy{font-size:16px;color:var(--muted);line-height:1.55;max-width:430px;margin:14px auto 18px}#qr{width:290px;min-height:290px;margin:10px auto 16px;display:grid;place-items:center}#qr img,#qr canvas{max-width:100%;height:auto!important}.scan{font-size:17px;color:var(--green);font-weight:800}.address{font-size:13px;color:var(--muted);line-height:1.6;margin-top:17px}.status{font-size:12px;color:#8b4b35}.controls{display:flex;gap:10px;justify-content:center;margin-top:20px}button{border:0;border-radius:10px;padding:12px 18px;background:var(--green);color:white;font-weight:700}button:disabled{opacity:.5}@media print{body{padding:0;background:#fff;display:block}.sheet{width:100%;max-width:none;min-height:100vh;border:0;border-radius:0;box-shadow:none;padding:30mm 18mm}.controls,.status{display:none}}</style></head><body><main class="sheet"><div class="line"></div><h1>Gareeb Nawaz Restaurant Gulmarg</h1><h2>Enjoyed your visit?</h2><p class="copy">We value your feedback. Scan this QR code to open our Google Review page and share your honest experience.</p><div id="qr" role="img" aria-label="Google review QR code">Loading QR…</div><div class="scan">SCAN TO REVIEW US ON GOOGLE</div><div class="address">Main Market, Gulmarg Road, near J&amp;K Bank, Gulmarg, Jammu and Kashmir 193403<br>+91 70064 60130</div><p class="status" id="status">Loading QR code. Do not print until it appears.</p><div class="controls"><button id="print" disabled onclick="window.print()">Print Poster</button><button id="download" disabled>Download QR PNG</button></div></main><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script>
+const url="https://search.google.com/local/writereview?placeid=ChIJrwguek2v4TgRHRmwAN6NjwM",box=document.getElementById("qr"),status=document.getElementById("status"),printBtn=document.getElementById("print"),downloadBtn=document.getElementById("download");if(typeof QRCode==="undefined"){box.textContent="QR library unavailable. Check internet.";status.textContent="QR not ready — do not print.";}else{try{new QRCode(box,{text:url,width:270,height:270,colorDark:"#111111",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.H});printBtn.disabled=false;downloadBtn.disabled=false;status.textContent="QR generated. Scan-test with another phone before printing.";}catch(e){box.textContent="QR generation failed.";status.textContent="QR not ready — do not print.";}}
+downloadBtn.addEventListener("click",()=>{const c=box.querySelector("canvas"),i=box.querySelector("img"),data=c?c.toDataURL("image/png"):i?.src;if(!data){status.textContent="QR is not ready.";return;}const a=document.createElement("a");a.href=data;a.download="gareeb-nawaz-gulmarg-google-review-qr.png";a.click();});
 </script></body></html>
