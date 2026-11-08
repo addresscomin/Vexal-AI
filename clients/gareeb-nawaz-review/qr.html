@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#173d32">
 <title>Gareeb Nawaz | QR Print Setup</title>
 <style>
 *{box-sizing:border-box}body{margin:0;padding:24px;background:#f3f5f2;color:#1d2822;font-family:system-ui,Arial,sans-serif;display:grid;place-items:center;min-height:100vh}
@@ -9,6 +10,7 @@ main{width:min(100%,520px);background:#fff;border:1px solid #e2e8e2;border-radiu
 h1{font-size:25px;margin:0 0 8px;color:#173d32}.muted{color:#68766e;font-size:14px;line-height:1.5}
 select,button{width:100%;padding:13px 14px;border-radius:11px;font-size:15px;margin-top:12px}
 select{border:1px solid #d7dfd8;background:white;color:#1d2822}button{border:0;background:#173d32;color:white;font-weight:700;cursor:pointer}
+button:disabled{opacity:.5;cursor:not-allowed}
 #qr{margin:22px auto 10px;width:280px;min-height:280px;display:grid;place-items:center;padding:14px;background:white;border:1px solid #e5e9e5;border-radius:12px}
 #qr img,#qr canvas{max-width:100%;height:auto!important}
 .note{font-size:12px;color:#7a857e;line-height:1.55;margin-top:17px}
@@ -20,26 +22,41 @@ select{border:1px solid #d7dfd8;background:white;color:#1d2822}button{border:0;b
 <option value="review">Direct Google Review form (recommended)</option>
 <option value="page">Restaurant review landing page</option>
 </select>
-<div id="qr" aria-label="Generated QR code"></div>
-<button id="download">Download QR as PNG</button>
-<p class="note">Print the direct Google Review QR for the simplest customer journey. The landing-page QR requires GitHub Pages to be enabled and the page to be live first. Always test the printed QR with a phone before distributing it.</p>
+<div id="qr" aria-label="Generated QR code" role="img">Preparing QR code…</div>
+<button id="download" disabled>Download QR as PNG</button>
+<p class="note" id="status" role="status" aria-live="polite">The direct Google Review form is selected by default. Always test the QR with a second phone before printing copies.</p>
+<p class="note">The landing-page QR requires GitHub Pages to be enabled and the page to be live first. QR generation also requires an internet connection to load the QR library.</p>
 </main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 const reviewUrl="https://search.google.com/local/writereview?placeid=ChIJR2wnAd2P4TgR6OEeUQgyy2g";
 const landingUrl="https://addresscomin.github.io/Vexal-AI/clients/gareeb-nawaz-review/";
 const target=document.getElementById("qr");
-let qr;
+const downloadButton=document.getElementById("download");
+const status=document.getElementById("status");
 function render(){
  target.innerHTML="";
+ downloadButton.disabled=true;
+ if(typeof QRCode==="undefined"){
+  target.textContent="QR library could not load. Check your internet connection and reload this page.";
+  status.textContent="QR generation is unavailable until the QR library loads.";
+  return;
+ }
  const value=document.getElementById("destination").value==="page"?landingUrl:reviewUrl;
- qr=new QRCode(target,{text:value,width:250,height:250,colorDark:"#111111",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.H});
+ try{
+  new QRCode(target,{text:value,width:250,height:250,colorDark:"#111111",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.H});
+  downloadButton.disabled=false;
+  status.textContent=document.getElementById("destination").value==="page"?"This QR opens the restaurant landing page. Confirm that the page is live before printing.":"This QR opens the direct Google Review form.";
+ }catch(error){
+  target.textContent="QR could not be generated. Please reload and try again.";
+  status.textContent="QR generation failed.";
+ }
 }
 document.getElementById("destination").addEventListener("change",render);
-document.getElementById("download").addEventListener("click",()=>{
+downloadButton.addEventListener("click",()=>{
  const canvas=target.querySelector("canvas");
  const img=target.querySelector("img");
- let data=canvas?canvas.toDataURL("image/png"):img?.src;
+ const data=canvas?canvas.toDataURL("image/png"):img?.src;
  if(!data){alert("QR is still loading. Please try again.");return;}
  const a=document.createElement("a");a.href=data;a.download="gareeb-nawaz-google-review-qr.png";a.click();
 });
