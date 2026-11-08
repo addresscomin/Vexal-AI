@@ -1,37 +1,46 @@
-# Gareeb Nawaz — Google Review QR
+# Gareeb Nawaz — Google Review QR Kit
 
-Customer-facing mini project for the Gareeb Nawaz listing at 1, Khayam, Srinagar, Jammu and Kashmir 190006.
+A standalone customer-facing review kit for **Gareeb Nawaz**, listed at **1, Khayam, Srinagar, Jammu and Kashmir 190006**.
 
-## Files
-- `index.html` — simple mobile-friendly landing page with Google Review and Google Maps buttons.
-- `qr.html` — QR generator with two choices:
-  - Direct Google Review form (recommended for the restaurant's printed table QR).
-  - Landing page (use only after GitHub Pages is enabled and the page is live).
+## Included files
 
-## Google destination
+- `index.html` — mobile-friendly landing page with direct Google Review and Google Maps buttons.
+- `qr.html` — QR generator with two scan destinations: direct Google Review form or the landing page. It can download a PNG QR.
+- `poster.html` — print-friendly poster with the direct Google Review QR, browser print support, and QR PNG download.
+- `README.md` — setup and handover notes.
+
+## Google destination configured
+
 - Place ID: `ChIJR2wnAd2P4TgR6OEeUQgyy2g`
-- Review URL: https://search.google.com/local/writereview?placeid=ChIJR2wnAd2P4TgR6OEeUQgyy2g
-- Maps URL: https://www.google.com/maps/search/?api=1&query=Gareeb%20Nawaz%20Khayam%20Srinagar&query_place_id=ChIJR2wnAd2P4TgR6OEeUQgyy2g
+- Direct review form: https://search.google.com/local/writereview?placeid=ChIJR2wnAd2P4TgR6OEeUQgyy2g
+- Google Maps: https://www.google.com/maps/search/?api=1&query=Gareeb%20Nawaz%20Khayam%20Srinagar&query_place_id=ChIJR2wnAd2P4TgR6OEeUQgyy2g
 
-## Publish
-This folder was added without changing the repository's existing root files.
+## How the restaurant uses it
 
-If GitHub Pages is enabled for the `main` branch with the repository root as the publishing source, the page URL should be:
-https://addresscomin.github.io/Vexal-AI/clients/gareeb-nawaz-review/
+1. Confirm with the owner that the Google destination above opens the correct Gareeb Nawaz profile.
+2. Open the published `poster.html` page and print it, or use `qr.html` to download a QR PNG.
+3. For the simplest scan journey, use the **Direct Google Review form** QR. The customer's camera opens Google's review flow.
+4. Test the QR from a second phone before printing multiple copies.
+5. Place the poster or QR stand where customers can choose to scan it voluntarily.
 
-Open `qr.html` at that published location to create a print-ready PNG QR. The direct-review option works independently of the landing page URL. The landing-page QR option should only be used after testing the published page.
+## Publish and URL
 
-## Testing checklist
-1. Confirm with the restaurant owner that this is the correct Google Business Profile.
-2. Open the direct review URL on a phone and confirm it opens the correct restaurant's review form.
-3. Generate and download the direct-review QR from `qr.html`.
-4. Scan the downloaded/printed QR from another phone.
-5. If using the landing page, enable GitHub Pages and test its URL before printing that QR.
+The files are inside a separate folder so the existing Vexal-AI root application is not overwritten. If the repository's current GitHub Pages deployment publishes the repository root, these files will be available at:
 
-## Scope notes
-- This setup sends customers to Google's own review flow. Customers can leave honest positive, neutral, or negative feedback.
-- It does not filter reviews or promise a particular rating.
-- Google does not provide a reliable confirmation to this static QR page that a review was actually submitted.
-- The direct Google Review QR does not provide scan analytics. Counting scans requires routing scans through a hosted landing page and adding an analytics property/configuration.
-- No personal customer data is collected by this static page.
-- Printing, acrylic stands, custom domain, and any third-party analytics account are outside this code package.
+- Landing page: https://addresscomin.github.io/Vexal-AI/clients/gareeb-nawaz-review/
+- QR generator: https://addresscomin.github.io/Vexal-AI/clients/gareeb-nawaz-review/qr.html
+- Print poster: https://addresscomin.github.io/Vexal-AI/clients/gareeb-nawaz-review/poster.html
+
+GitHub Pages live status and the final public URLs still need to be checked in the repository's Pages settings. Do not tell the client that the website is live until it has been opened and tested on a phone.
+
+## Analytics and limitations
+
+- A direct-to-Google QR is the shortest route but does not provide scan counts.
+- A landing-page QR can be connected to a privacy-conscious analytics provider later, but that requires an analytics property/ID and consent/configuration. No fake or local-only counter is presented as total scans.
+- Google does not give this static page a reliable signal that a review was actually submitted.
+- The page does not collect customer names, phone numbers, email addresses, or review text.
+- Customers must be free to leave positive, neutral, or negative feedback. Do not gate, filter, or reward only positive reviews.
+
+## Client quotation guidance
+
+Suggested one-time service fee: **₹2,499** for setup, landing page, QR generator, print poster file, testing, and handover. Physical printing, acrylic table stands, custom domain, and paid third-party analytics are extra.
