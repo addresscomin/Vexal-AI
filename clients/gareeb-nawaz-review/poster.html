@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#173d32">
 <title>Gareeb Nawaz — Google Review Poster</title>
 <style>
 :root{--green:#173d32;--gold:#b99152;--ink:#1d2822;--muted:#69756e}
@@ -11,30 +12,49 @@
 h1{font-size:38px;letter-spacing:-1px;color:var(--green);margin:0}
 h2{font-size:22px;margin:12px 0 0;font-weight:600}
 .copy{font-size:16px;color:var(--muted);line-height:1.55;max-width:430px;margin:14px auto 20px}
-#qr{width:290px;height:290px;margin:10px auto 18px;display:grid;place-items:center}
+#qr{width:290px;min-height:290px;margin:10px auto 18px;display:grid;place-items:center}
 #qr img,#qr canvas{max-width:100%;height:auto!important}
 .scan{font-size:18px;color:var(--green);font-weight:800;letter-spacing:.2px}
 .address{font-size:13px;color:var(--muted);margin-top:17px}
+.status{font-size:12px;color:#8b4b35;line-height:1.5}
 .controls{display:flex;gap:10px;justify-content:center;margin-top:22px}
 button{border:0;border-radius:10px;padding:12px 18px;background:var(--green);color:white;font-weight:700;font-size:14px}
 button.secondary{background:#eaf0eb;color:var(--green)}
-@media print{body{padding:0;background:#fff;display:block}.sheet{width:100%;max-width:none;min-height:100vh;border:0;border-radius:0;box-shadow:none;padding:35mm 18mm}.controls{display:none}}
+button:disabled{opacity:.5;cursor:not-allowed}
+@media print{body{padding:0;background:#fff;display:block}.sheet{width:100%;max-width:none;min-height:100vh;border:0;border-radius:0;box-shadow:none;padding:35mm 18mm}.controls,.status{display:none}}
 </style></head>
 <body><main class="sheet">
 <div class="topline"></div>
 <h1>Gareeb Nawaz</h1>
 <h2>Enjoyed your visit?</h2>
 <p class="copy">We value your feedback. Scan the QR code to open our Google Review page and share your honest experience.</p>
-<div id="qr" aria-label="Google review QR code"></div>
+<div id="qr" aria-label="Google review QR code" role="img">Preparing QR code…</div>
 <div class="scan">SCAN TO REVIEW US ON GOOGLE</div>
 <div class="address">1, Khayam, Srinagar, Jammu and Kashmir 190006</div>
-<div class="controls"><button onclick="window.print()">Print poster</button><button class="secondary" onclick="downloadQR()">Download QR PNG</button></div>
+<p class="status" id="status" role="status" aria-live="polite">Loading QR code. Please wait before printing.</p>
+<div class="controls"><button id="print" onclick="window.print()" disabled>Print poster</button><button id="download" class="secondary" onclick="downloadQR()" disabled>Download QR PNG</button></div>
 </main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 const reviewUrl="https://search.google.com/local/writereview?placeid=ChIJR2wnAd2P4TgR6OEeUQgyy2g";
 const box=document.getElementById("qr");
-new QRCode(box,{text:reviewUrl,width:270,height:270,colorDark:"#111111",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.H});
+const status=document.getElementById("status");
+const printButton=document.getElementById("print");
+const downloadButton=document.getElementById("download");
+if(typeof QRCode==="undefined"){
+ box.textContent="QR library could not load. Check your internet connection and reload.";
+ status.textContent="QR not ready — do not print this poster yet.";
+}else{
+ try{
+  new QRCode(box,{text:reviewUrl,width:270,height:270,colorDark:"#111111",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.H});
+  status.textContent="QR generated. Scan-test it with another phone before printing.";
+  printButton.disabled=false;
+  downloadButton.disabled=false;
+ }catch(error){
+  box.textContent="QR could not be generated. Please reload and try again.";
+  status.textContent="QR not ready — do not print this poster yet.";
+ }
+}
 function downloadQR(){
  const canvas=box.querySelector("canvas"),img=box.querySelector("img");
  const href=canvas?canvas.toDataURL("image/png"):img?.src;
