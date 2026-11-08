@@ -1,50 +1,26 @@
-# Gareeb Nawaz — Google Review QR Kit
+# Gareeb Nawaz Restaurant Gulmarg — Google Review QR System
 
-A standalone customer-facing review kit for **Gareeb Nawaz**, listed at **1, Khayam, Srinagar, Jammu and Kashmir 190006**.
+A single-purpose QR review kit for Gareeb Nawaz Restaurant Gulmarg. It does not include ordering, booking, customer accounts, payments, maps tools, or other business systems.
 
-## Included files
+## Files
+- `index.html` — simple customer review page with one Google Review button.
+- `qr.html` — generates and downloads the direct Google Review QR as PNG.
+- `poster.html` — print-ready review poster with the same direct-review QR, print and PNG-download controls.
 
-- `index.html` — mobile-friendly landing page with direct Google Review and Google Maps buttons.
-- `qr.html` — QR generator with two scan destinations: direct Google Review form or the landing page. It can download a PNG QR.
-- `poster.html` — print-friendly poster with the direct Google Review QR, browser print support, and QR PNG download.
-- `README.md` — setup and handover notes.
+## Business details
+- Business: Gareeb Nawaz Restaurant Gulmarg
+- Address: Main Market, Gulmarg Road, near J&K Bank, Gulmarg, Jammu and Kashmir 193403
+- Phone: +91 70064 60130
+- Google Place ID currently configured: `ChIJrwguek2v4TgRHRmwAN6NjwM`
+- Review URL: https://search.google.com/local/writereview?placeid=ChIJrwguek2v4TgRHRmwAN6NjwM
+- Maps listing: https://www.google.com/maps/search/?api=1&query=Gareeb%20Nawaz%20Restaurant%20Gulmarg&query_place_id=ChIJrwguek2v4TgRHRmwAN6NjwM
 
-## Google destination configured
+## Before printing or handover
+1. Open the direct review URL on a phone and confirm the Google profile name and address match this restaurant.
+2. Open `qr.html`, download the PNG, and scan it using a second phone.
+3. Confirm the scan opens the correct Google review profile.
+4. Print one sample and test scan distance and print clarity.
 
-- Google Place ID: `ChIJR2wnAd2P4TgR6OEeUQgyy2g`
-- Direct review form: https://search.google.com/local/writereview?placeid=ChIJR2wnAd2P4TgR6OEeUQgyy2g
-- Google Maps: https://www.google.com/maps/search/?api=1&query=Gareeb%20Nawaz%20Khayam%20Srinagar&query_place_id=ChIJR2wnAd2P4TgR6OEeUQgyy2g
+**Important:** the business phone number and address match the public listing, but the configured Place ID/review destination still requires a live phone check. Do not mass-print or hand over as verified until that test passes.
 
-The configured Place ID and address match the Gareeb Nawaz cafeteria listing at 1, Khayam, Srinagar. The review form itself must still be opened and scan-tested on a phone before printing or handing over.
-
-## How the restaurant uses it
-
-1. Open the live review destination on a phone and confirm it shows the correct Gareeb Nawaz Google profile.
-2. Open the published `poster.html` page and print it, or use `qr.html` to download a QR PNG.
-3. For the simplest scan journey, use the **Direct Google Review form** QR. The customer's camera opens Google's review flow.
-4. Scan the printed QR from a second phone and confirm the correct business profile opens.
-5. Print one sample first. Check that the QR is sharp, not cropped, and still scans from normal table distance.
-6. Place the poster or QR stand where customers can choose to scan it voluntarily.
-
-## Publish and URL
-
-The files are inside a separate folder so the existing Vexal-AI root application is not overwritten. If the repository's current GitHub Pages deployment publishes the repository root, these files will be available at:
-
-- Landing page: https://addresscomin.github.io/Vexal-AI/clients/gareeb-nawaz-review/
-- QR generator: https://addresscomin.github.io/Vexal-AI/clients/gareeb-nawaz-review/qr.html
-- Print poster: https://addresscomin.github.io/Vexal-AI/clients/gareeb-nawaz-review/poster.html
-
-GitHub Pages live status and the final public URLs still need to be checked in the repository's Pages settings. Do not tell the client that the website is live until it has been opened and tested on a phone.
-
-## Analytics and limitations
-
-- A direct-to-Google QR is the shortest route but does not provide scan counts.
-- A landing-page QR can be connected to a privacy-conscious analytics provider later, but that requires an analytics property/ID and consent/configuration. No fake or local-only counter is presented as total scans.
-- Google does not give this static page a reliable signal that a review was actually submitted.
-- The page does not collect customer names, phone numbers, email addresses, or review text.
-- Customers must be free to leave positive, neutral, or negative feedback. Do not gate, filter, or reward only positive reviews.
-- QR generation uses a browser-loaded QR library, so an internet connection is required when opening the generator or poster page.
-
-## Client quotation guidance
-
-Suggested one-time service fee: **₹2,499** for setup, landing page, QR generator, print poster file, testing, and handover. Physical printing, acrylic table stands, custom domain, and paid third-party analytics are extra.
+QR generation loads a browser QR library from a CDN, so internet access is required when opening the generator/poster. This static kit does not track QR scans or verify whether a Google review was submitted. Customers must be free to leave honest positive, neutral, or negative feedback; no review gating or incentives are used.
