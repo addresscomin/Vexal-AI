@@ -48,7 +48,9 @@ insert = '''        val etLng = field("Longitude", Prefs.lng(this).toString(), t
         col.addView(tv("Daily prayer-time correction (minutes)", 17f, true))
         col.addView(tv("0 = automatic calculated time. +5 = 5 minutes later. -5 = 5 minutes earlier. Range: -60 to +60.", 12f, false, Color.LTGRAY))
         val prayerAdjustments = PrayerTimes.NAMES.indices.map { idx ->
-            field("${PrayerTimes.NAMES[idx]} correction (min)", Prefs.prayerOffset(this, idx).toString())
+            field("${PrayerTimes.NAMES[idx]} correction (min)", Prefs.prayerOffset(this, idx).toString()).apply {
+                inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_SIGNED
+            }
         }
         col.addView(btn("🕌 Save prayer timings") {
             val values = prayerAdjustments.map { it.text.toString().toIntOrNull() }
