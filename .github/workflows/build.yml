@@ -11,6 +11,7 @@ jobs:
           cp patches/BlockerAccessibilityService.kt NamazGuard/app/src/main/java/com/me/blocker/BlockerAccessibilityService.kt
           cp patches/accessibility_config.xml NamazGuard/app/src/main/res/xml/accessibility_config.xml
           python3 patches/apply_main_ui.py
+          python3 patches/apply_prayer_update.py
       - uses: actions/upload-artifact@v4
         with:
           name: NamazGuard-source-inspection
