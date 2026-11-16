@@ -6,6 +6,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: unzip -q "NamazGuard (1).zip"
+      - run: |
+          cp patches/HomeActivity.kt NamazGuard/app/src/main/java/com/me/blocker/HomeActivity.kt
+          cp patches/BlockerAccessibilityService.kt NamazGuard/app/src/main/java/com/me/blocker/BlockerAccessibilityService.kt
+          cp patches/accessibility_config.xml NamazGuard/app/src/main/res/xml/accessibility_config.xml
+          python3 patches/apply_main_ui.py
       - uses: actions/upload-artifact@v4
         with:
           name: NamazGuard-source-inspection
