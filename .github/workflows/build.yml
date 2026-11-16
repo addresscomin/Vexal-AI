@@ -6,6 +6,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: unzip -q "NamazGuard (1).zip"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: NamazGuard-source-inspection
+          path: NamazGuard/
+          if-no-files-found: error
+          retention-days: 1
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
