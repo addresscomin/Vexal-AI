@@ -1,23 +1,18 @@
-name: Build APK
-on:
-  workflow_dispatch:
-  push:
+name: Unzip
+on: workflow_dispatch
+permissions:
+  contents: write
 jobs:
-  build:
+  unzip:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: unzip -q DisciplineGuard_v4.zip
-      - uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: 17
-      - uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: 8.9
-      - run: gradle assembleDebug --no-daemon --stacktrace
-        working-directory: DisciplineGuard
-      - uses: actions/upload-artifact@v4
-        with:
-          name: NamazGuard-apk
-          path: DisciplineGuard/app/build/outputs/apk/debug/*.apk
+      - run: |
+          unzip -q DisciplineGuard_v4.zip -x "DisciplineGuard/.github/*"
+          cp -a DisciplineGuard/. .
+          rm -rf DisciplineGuard DisciplineGuard_v4.zip
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add -A
+          git commit -m "Extract project"
+          git push
