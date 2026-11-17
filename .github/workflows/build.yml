@@ -20,4 +20,4 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: NamazGuard-apk
-          path: NamazGuard/app/build/outputs/apk/debug/*.apk
+          path: DisciplineGuard/app/build/outputs/apk/debug/*.apk
